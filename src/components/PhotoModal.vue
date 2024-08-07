@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { addComment, getPhotoDetails, type PhotoDetail } from '@/services/api'
 import { onMounted, ref, watch } from 'vue'
+import CommentList from './CommentList.vue'
 
 onMounted(() => {
   if (!photoDialog.value) {
@@ -110,6 +111,11 @@ function addNewComment() {
       </div>
 
       <button @click.stop="addNewComment" class="dialog-btn-save">Save</button>
+
+      <div class="comments-box">
+        <span class="subtitle-comments">Comments</span>
+        <CommentList v-if="photoDetails" :comments="photoDetails.comments" />
+      </div>
     </div>
   </dialog>
 </template>
@@ -137,7 +143,9 @@ function addNewComment() {
   max-width: 692px;
   min-width: 400px;
   width: 100%;
-  height: 706px;
+  max-height: 800px;
+  min-height: 600px;
+  height: 100%;
 }
 
 .dialog-photo {
@@ -204,6 +212,19 @@ function addNewComment() {
   transition: 0.4s ease;
 }
 
+.comments-box {
+  display: flex;
+  flex-direction: column;
+  align-self: baseline;
+  gap: 18px;
+}
+
+.subtitle-comments {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #374151;
+}
 .dialog-btn-save:hover {
   background-color: #484492;
 }

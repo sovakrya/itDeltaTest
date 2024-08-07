@@ -3,7 +3,7 @@ export type Photo = {
   image: string
 }
 
-type Comment = {
+export type Comment = {
   id: number
   author: string
   text: string
